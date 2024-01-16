@@ -40,7 +40,7 @@ jobs:
       - uses: bcgov-nr/action-builder-ghcr@v2.0.1
         with:
           package: ${{ matrix.package }}
-          tag: ${{ github.sha }}
+          tag: pr-${{ github.event.number }}
           tag_fallback: test
           token: ${{ secrets.GITHUB_TOKEN }}
           triggers: ${{ matrix.triggers }}
@@ -67,6 +67,6 @@ jobs:
           cd charts/${{ github.event.repository.name }}
           helm dependency update
           helm upgrade --install --wait --atomic  ${{ github.repository.name }}-${{ github.event.number }}  \
-          --set-string global.tag=${{ github.event.number }}  \
-          --set-string global.repository=${{ github.repository }}  \
+          --set-string global.tag="pr-${{ github.event.number }}"  \
+          --set-string global.repository="${{ github.repository }}"  \
           -f values.yaml --timeout 5m  .
