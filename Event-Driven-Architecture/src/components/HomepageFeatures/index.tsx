@@ -4,20 +4,47 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
-
+  {
+    title: 'Governance',
+    description: (
+      <>
+        More about Governance in Event Driven Architecture.
+      </>
+    ),
+  },
+  {
+    title: 'Integration',
+    description: (
+      <>
+        More about Integration in Event Driven Architecture.
+      </>
+    ),
+  },
+  {
+    title: 'Metadata',
+    description: (
+      <>
+        More about Metadata in Event Driven Architecture.
+      </>
+    ),
+  },
+  {
+    title: 'Security',
+    description: (
+      <>
+        More about Security in Event Driven Architecture.
+      </>
+    ),
+  },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>

@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Event Driven Architecture Patterns & Best Practices',
-  tagline: 'Events are everywhere, but how do you use them, what are the best practices?',
+  tagline: 'Events are everywhere, but how do I use them, what are the best practices?',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -59,7 +59,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Docs',
         },
         {
           type: 'search',
