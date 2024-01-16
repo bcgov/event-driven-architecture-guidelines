@@ -1,0 +1,5 @@
+[![Issues](https://img.shields.io/github/issues/bcgov/event-driven-architecture-guidelines)](/../../issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/bcgov/event-driven-architecture-guidelines)](/../../pulls)
+[![MIT License](https://img.shields.io/github/license/bcgov/event-driven-architecture-guidelines.svg)](/LICENSE.md)
+[![Lifecycle](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+### [Event Driven Architecture Guidelines](https://bcgov.github.io/event-driven-architecture-guidelines)
