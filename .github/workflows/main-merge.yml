@@ -6,6 +6,9 @@ on:
 
 jobs:
     build-deploy:
+      defaults:
+        run:
+          working-directory: ./Event-Driven-Architecture
       name: Build and Deploy Docusaurus to GitHub Pages
       runs-on: ubuntu-latest
       steps:
