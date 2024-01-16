@@ -62,9 +62,9 @@ jobs:
           # Login to OpenShift (NOTE: project command is a safeguard)
           oc login --token=${{ secrets.oc_token }} --server=${{ vars.oc_server }}
           oc project ${{ vars.oc_namespace }}
-          helm uninstall ${{ github.repository.name }}-${{ github.event.number }} || true
+          helm uninstall ${{ github.event.repository.name }}-${{ github.event.number }} || true
           # Deploy Helm Chart
-          cd charts/${{ github.repository.name }}
+          cd charts/${{ github.event.repository.name }}
           helm dependency update
           helm upgrade --install --wait --atomic  ${{ github.repository.name }}-${{ github.event.number }}  \
           --set-string global.tag=${{ github.event.number }}  \
