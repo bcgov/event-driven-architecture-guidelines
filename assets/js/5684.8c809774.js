@@ -1,0 +1,1 @@
+(self.webpackChunkevent_driven_architecture=self.webpackChunkevent_driven_architecture||[]).push([[5684],{9039:(e,t,c)=>{"use strict";c.d(t,{Z:()=>n});var r=c(1336);const n=r},5525:()=>{}}]);
