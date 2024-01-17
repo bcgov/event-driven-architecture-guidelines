@@ -6,11 +6,12 @@ on:
 
 jobs:
     build-deploy:
+      name: Build and Deploy Docusaurus to GitHub Pages
+      runs-on: ubuntu-22.04
       defaults:
         run:
-          working-directory: Event-Driven-Architecture
-      name: Build and Deploy Docusaurus to GitHub Pages
-      runs-on: ubuntu-latest
+          working-directory: ./Event-Driven-Architecture
+      
       steps:
         - uses: actions/checkout@v4
         - uses: actions/setup-node@v4
