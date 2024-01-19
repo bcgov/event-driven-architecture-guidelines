@@ -19,8 +19,8 @@ jobs:
             Thanks for the PR!
 
             Deployments, as required, will be available below:
-            - [Frontend](https://https://bcgov.github.io/event-driven-architecture-guidelines/${{githu.actor}}/${{githu.event.number}})
-            - [Frontend](${{github.actor}}/${{github.event.number}})
+            - [Frontend](https://bcgov.github.io/event-driven-architecture-guidelines/${{github.actor}}/${{github.event.number}})
+
 
   deploys:
     runs-on: ubuntu-22.04
