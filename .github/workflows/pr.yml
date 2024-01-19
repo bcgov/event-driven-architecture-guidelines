@@ -19,7 +19,7 @@ jobs:
             Thanks for the PR!
 
             Deployments, as required, will be available below:
-            - [Frontend](https://bcgov.github.io/event-driven-architecture-guidelines/${{github.actor}}/${{github.event.number}})
+            - [Frontend](https://bcgov.github.io/event-driven-architecture-guidelines/pr/${{github.actor}}/${{github.event.number}})
 
 
   deploys:
@@ -39,7 +39,7 @@ jobs:
         run:  npm ci --ignore-scripts
       - name: Build website
         run: |
-          export BASE_URL="/event-driven-architecture-guidelines/${{github.actor}}/${{github.event.number}}" && npm run build
+          export BASE_URL="/event-driven-architecture-guidelines/pr/${{github.actor}}/${{github.event.number}}" && npm run build
   
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
@@ -49,4 +49,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Build output to publish to the `gh-pages` branch:
           publish_dir: ./Event-Driven-Architecture/build
-          destination_dir: ${{github.actor}}/${{github.event.number}}
+          destination_dir: pr/${{github.actor}}/${{github.event.number}}
