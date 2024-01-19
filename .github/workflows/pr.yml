@@ -1,4 +1,4 @@
-name: Deploy to OpenShift on PR
+name: Deploy to Github Pages on PR
 on:
   pull_request:
     branches:
@@ -24,6 +24,9 @@ jobs:
 
   deploys:
     runs-on: ubuntu-22.04
+    defaults:
+        run:
+          working-directory: ./Event-Driven-Architecture
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
