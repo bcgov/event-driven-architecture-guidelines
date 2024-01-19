@@ -19,54 +19,31 @@ jobs:
             Thanks for the PR!
 
             Deployments, as required, will be available below:
-            - [Frontend](https://${{ github.event.repository.name }}-${{ github.event.number }}.apps.silver.devops.gov.bc.ca)
+            - [Frontend](https://https://bcgov.github.io/event-driven-architecture-guidelines/${{githu.actor}}/${{githu.event.number}})
+            - [Frontend](${{github.actor}}/${{github.event.number}})
 
-  builds:
-    name: Builds
-    runs-on: ubuntu-22.04
-    permissions:
-      packages: write
-    strategy:
-      matrix:
-        package: [frontend]
-        include:
-          - package: frontend
-            triggers: ('Event-Driven-Architecture/')
-            build_file: ./Event-Driven-Architecture/Dockerfile
-            build_context: ./Event-Driven-Architecture
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: bcgov-nr/action-builder-ghcr@v2.0.1
-        with:
-          package: ${{ matrix.package }}
-          tag: pr-${{ github.event.number }}
-          tag_fallback: test
-          token: ${{ secrets.GITHUB_TOKEN }}
-          triggers: ${{ matrix.triggers }}
-          build_context: ${{ matrix.build_context }}
-          build_file: ${{ matrix.build_file }}
   deploys:
-    name: Deploys
-    needs: [builds]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-        name: Checkout
-      - name: Deploy to OpenShift
-        shell: bash
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: Event-Driven-Architecture/package-lock.json
+  
+      - name: Install dependencies
+        run:  npm ci --ignore-scripts
+      - name: Build website
         run: |
-          # Allow pipefail, since we could be catching oc create errors
-          set +o pipefail
-    
-          # Login to OpenShift (NOTE: project command is a safeguard)
-          oc login --token=${{ secrets.oc_token }} --server=${{ vars.oc_server }}
-          oc project ${{ vars.oc_namespace }}
-          helm uninstall ${{ github.event.repository.name }}-${{ github.event.number }} || true
-          # Deploy Helm Chart
-          cd charts/${{ github.event.repository.name }}
-          helm dependency update
-          helm upgrade --install --wait --atomic  ${{ github.event.repository.name }}-${{ github.event.number }}  \
-          --set-string global.tag="pr-${{ github.event.number }}"  \
-          --set-string global.repository="${{ github.repository }}"  \
-          -f values.yaml --timeout 5m  .
+          export BASE_URL="/event-driven-architecture-guidelines/${{github.actor}}/${{github.event.number}}" && npm run build
+  
+      # Popular action to deploy to GitHub Pages:
+      # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Build output to publish to the `gh-pages` branch:
+          publish_dir: ./Event-Driven-Architecture/build
+          destination_dir: ${{github.actor}}/${{github.event.number}}
