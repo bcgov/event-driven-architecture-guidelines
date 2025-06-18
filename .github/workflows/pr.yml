@@ -6,12 +6,12 @@ on:
 jobs:
   pr-description-add:
     name: PR Description Add
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       pull-requests: write
     timeout-minutes: 1
     steps:
-      - uses: bcgov-nr/action-pr-description-add@v1.2.0
+      - uses: bcgov-nr/action-pr-description-add@v2.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           add_markdown: |
@@ -23,7 +23,7 @@ jobs:
 
   builds:
     name: Builds
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       packages: write
     strategy:
@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: bcgov-nr/action-builder-ghcr@v2.3.0
+      - uses: bcgov-nr/action-builder-ghcr@v4.0.0
         with:
           package: ${{ matrix.package }}
           tag: pr-${{ github.event.number }}
@@ -49,7 +49,7 @@ jobs:
   deploys:
     name: Deploys
     needs: [builds]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         name: Checkout
